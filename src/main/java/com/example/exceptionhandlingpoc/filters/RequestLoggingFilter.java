@@ -36,23 +36,16 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         String responseBodyString = new String(responseBody, StandardCharsets.UTF_8);
         wrappedResponse.copyBodyToResponse();
         log.info("""
-                        \n
-                        ####
-                        
+                        \nRequest ID: {}
                         Request URI: {} {}
-                        Request ID: {}
                         Request Body: {}
-                        
                         --
-                        
-                        wResponse Status: {}
+                        Response Status: {}
                         Response Body: {}
-                        
-                        ####
                         """,
+                wrappedRequest.getAttribute("request-id"),
                 wrappedRequest.getMethod(),
                 wrappedRequest.getRequestURI(),
-                wrappedRequest.getAttribute("request-id"),
                 requestBodyString,
                 wrappedResponse.getStatus(),
                 responseBodyString);

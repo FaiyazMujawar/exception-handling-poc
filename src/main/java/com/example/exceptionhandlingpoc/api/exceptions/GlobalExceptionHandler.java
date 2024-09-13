@@ -141,7 +141,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     public ErrorResponse handleException(Exception e) {
-        e.printStackTrace();
+        log.error(e.getLocalizedMessage(), e);
         return ErrorResponse.builder()
                 .code(ExceptionCode.INTERNAL_SERVER_ERROR)
                 .message(e.getLocalizedMessage())

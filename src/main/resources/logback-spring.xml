@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="REQUEST_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>logs/requests.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="SERVICE_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>logs/service.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="EXCEPTION_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>logs/exceptions.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n%ex{full}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="CONTROLLER_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>logs/controller.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.example.exceptionhandlingpoc.services" level="DEBUG" additivity="false">
+        <appender-ref ref="SERVICE_LOG"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="com.example.exceptionhandlingpoc.api.controllers" level="DEBUG" additivity="false">
+        <appender-ref ref="CONTROLLER_LOG"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="com.example.exceptionhandlingpoc.api.exceptions" level="INFO" additivity="false">
+        <appender-ref ref="EXCEPTION_LOG"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="com.example.exceptionhandlingpoc.filters.RequestLoggingFilter" level="INFO" additivity="false">
+        <appender-ref ref="REQUEST_LOG"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

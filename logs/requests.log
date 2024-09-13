@@ -1,0 +1,8 @@
+2024-09-13 18:47:26 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 05cf281f-3345-4138-b402-9dbdf849b337
+Request URI: GET /throw
+Request Body: 
+--
+Response Status: 500
+Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"test","errors":[]}
+
