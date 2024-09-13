@@ -40,4 +40,9 @@ public class HomeController {
     public List<Post> getPosts() {
         return postRepository.findAllPosts();
     }
+
+    @GetMapping(path = "/throw")
+    public Post getPost() {
+        throw new RuntimeException("test");
+    }
 }
