@@ -6,3 +6,99 @@ Request Body:
 Response Status: 500
 Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"test","errors":[]}
 
+2024-09-19 11:57:26 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 30820588-1800-473e-9e77-e13838706d79
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 500
+Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Request method 'POST' is not supported","errors":[]}
+
+2024-09-19 11:57:45 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 09e4019a-1669-4012-9fa1-ad92c5ca84d3
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 500
+Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"/Users/faiyazmujawar/Documents/codes/rhuemera-api/exception-handling-poc/input/input/edf1c913-e3bf-4dce-9c40-a77f228ae0e8","errors":[]}
+
+2024-09-19 12:03:04 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 74ec38c0-cd7c-4c68-83e1-0d72e4895686
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 500
+Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot invoke \"org.apache.poi.xssf.usermodel.XSSFSheet.getRow(int)\" because \"this.sheet\" is null","errors":[]}
+
+2024-09-19 12:04:10 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 119bbd0c-2fa0-44d0-b89e-a0797262e454
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 500
+Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot invoke \"org.apache.poi.xssf.usermodel.XSSFSheet.getRow(int)\" because \"this.sheet\" is null","errors":[]}
+
+2024-09-19 12:05:54 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 16fc6959-ea40-47a4-bfdb-2ec10bcbe05b
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 500
+Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot invoke \"org.apache.poi.xssf.usermodel.XSSFSheet.getRow(int)\" because \"this.sheet\" is null","errors":[]}
+
+2024-09-19 12:10:26 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: f109f3e6-e884-464e-8393-5c1095b257ec
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-19 12:12:28 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: bb1953d4-a46c-4ae6-acdb-ee559a9fe118
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 500
+Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot invoke \"org.apache.poi.xssf.usermodel.XSSFRow.getFirstCellNum()\" because \"headerRow\" is null","errors":[]}
+
+2024-09-19 12:13:23 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 010a9f6c-ee49-4305-b532-390b972fe622
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: [{"row":5,"item":{"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"123","STATUS":"ACTIVE"}}]
+
+2024-09-19 12:22:11 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: b2a5bd19-593c-46ad-af06-3e035efd9912
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: [{"row":6,"item":{"errors":["Status can only be ACTIVE or INACTIVE","MRN cannot be blank"],"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"","STATUS":"no"},"valid":false}]
+
+2024-09-19 12:23:40 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 51cac5c3-5eb0-4e79-a163-4b925e1ad7f3
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: [{"row":6,"item":{"errors":["Status can only be ACTIVE or INACTIVE","MRN cannot be blank"],"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"","STATUS":"no"},"valid":false},{"row":7,"item":{"errors":[],"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"19/10/1999","MRN":"124","STATUS":"ACTIVE"},"valid":true}]
+
+2024-09-19 12:27:34 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 1637225f-2494-4cfa-95c4-baf8df4f421e
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: [{"row":6,"item":{"errors":["Status can only be ACTIVE or INACTIVE","MRN cannot be blank"],"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"","STATUS":"no"},"raw":{"STATUS":"no","MRN":"","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","FIRST_NAME":"faiyaz"},"valid":false},{"row":7,"item":{"errors":[],"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"19/10/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"STATUS":"ACTIVE","MRN":"124","LAST_NAME":"shukla","DATE_OF_BIRTH":"19/10/1999","FIRST_NAME":"ruchi"},"valid":true}]
+
+2024-09-19 12:28:18 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 4b2bfd94-9c11-43ab-810b-ebb7e99c5198
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: [{"row":6,"item":{"errors":["Status can only be ACTIVE or INACTIVE","MRN cannot be blank"],"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"","STATUS":"no"},"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"no"},"valid":false},{"row":7,"item":{"errors":[],"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"19/10/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"19/10/1999","Patient MRN":"124","Status":"ACTIVE"},"valid":true}]
+
