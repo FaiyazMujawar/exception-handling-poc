@@ -254,3 +254,123 @@ Request Body:
 Response Status: 200
 Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"no"},"errors":["Parsing failed for: STATUS"],"valid":false},{"row":7,"item":{"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"10/19/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"10/19/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":[],"valid":true}]
 
+2024-09-19 14:50:13 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 54fa87c6-e1c4-4000-810e-b8064056e892
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false},{"row":7,"item":{"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"10/19/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"10/19/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":[],"valid":true}]
+
+2024-09-19 15:55:23 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 4ede8ec2-a92c-4aed-8efd-3e57ac93e627
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 400
+Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
+
+2024-09-19 15:56:50 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 6306b552-f3bb-4135-8333-267fc3b2e1da
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 400
+Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
+
+2024-09-19 16:46:25 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 8d3b18ac-c23b-44de-8f8d-0ea65d98ddb7
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 400
+Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
+
+2024-09-19 16:46:57 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: e6ec85ab-c7d8-4216-aba7-43a2512d8bb6
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 400
+Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
+
+2024-09-19 16:47:44 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 7a490892-ca11-4458-8209-5e080458158a
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 400
+Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
+
+2024-09-19 16:49:32 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 16ca08c9-32ed-4c45-8a66-a4d775a956ab
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-19 16:49:52 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: e8155241-679c-48b8-b304-d699a26e4fe1
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-19 16:53:29 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 5336fa12-bb1a-4d52-a834-078760ddeb91
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-19 17:04:06 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: e35c4d42-6de4-467c-af3a-406cf5701d23
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-19 17:04:40 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: daef5ad3-400a-4e20-b9c1-84fcde3b4bae
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 400
+Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
+
+2024-09-19 17:05:13 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: c95570b3-405c-4993-a212-56d527c502fe
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-19 17:09:41 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 6eb847a5-a5ba-4e21-9777-eb980fcbc31e
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-19 17:15:42 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 947209d2-1601-4af7-af8e-1aea7be14c8d
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-19 17:25:02 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 2ed8351e-672b-4898-8d36-ba8004cf0107
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+

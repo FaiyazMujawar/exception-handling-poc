@@ -21,7 +21,6 @@ import org.springframework.util.Assert;
 import java.util.*;
 
 import static com.example.exceptionhandlingpoc.batch.utils.ExcelUtils.*;
-import static com.example.exceptionhandlingpoc.batch.utils.ReflectionUtils.getColumnHeaders;
 import static com.example.exceptionhandlingpoc.batch.utils.ReflectionUtils.headerColumnFormats;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -44,7 +43,6 @@ public class PoiItemReader<T> implements ResourceAwareItemReaderItemStream<LineI
     private Map<String, String> columnMappings;
     private Map<String, ColumnFormat> columnConfig;
     private List<String> headers = new ArrayList<>();
-    private List<String> classFields = new ArrayList<>();
     private int firstRow = 0;
     private int lastRow = 0;
     private int currentRow = 0;
@@ -60,7 +58,6 @@ public class PoiItemReader<T> implements ResourceAwareItemReaderItemStream<LineI
 
     public void setTargetType(@NonNull Class<T> targetType) {
         this.targetType = targetType;
-        this.classFields = getColumnHeaders(this.targetType);
     }
 
     @SneakyThrows
