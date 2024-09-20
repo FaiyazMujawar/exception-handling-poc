@@ -1,373 +1,317 @@
-2024-09-13 18:47:26 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 05cf281f-3345-4138-b402-9dbdf849b337
-Request URI: GET /throw
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"test","errors":[]}
-
-2024-09-19 11:57:26 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 30820588-1800-473e-9e77-e13838706d79
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Request method 'POST' is not supported","errors":[]}
-
-2024-09-19 11:57:45 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 09e4019a-1669-4012-9fa1-ad92c5ca84d3
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"/Users/faiyazmujawar/Documents/codes/rhuemera-api/exception-handling-poc/input/input/edf1c913-e3bf-4dce-9c40-a77f228ae0e8","errors":[]}
-
-2024-09-19 12:03:04 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 74ec38c0-cd7c-4c68-83e1-0d72e4895686
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot invoke \"org.apache.poi.xssf.usermodel.XSSFSheet.getRow(int)\" because \"this.sheet\" is null","errors":[]}
-
-2024-09-19 12:04:10 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 119bbd0c-2fa0-44d0-b89e-a0797262e454
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot invoke \"org.apache.poi.xssf.usermodel.XSSFSheet.getRow(int)\" because \"this.sheet\" is null","errors":[]}
-
-2024-09-19 12:05:54 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 16fc6959-ea40-47a4-bfdb-2ec10bcbe05b
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot invoke \"org.apache.poi.xssf.usermodel.XSSFSheet.getRow(int)\" because \"this.sheet\" is null","errors":[]}
-
-2024-09-19 12:10:26 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: f109f3e6-e884-464e-8393-5c1095b257ec
+2024-09-20 13:06:45 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 496c2ed5-cc99-4846-91d7-78ff318009b9
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
 Response Body: 
 
-2024-09-19 12:12:28 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: bb1953d4-a46c-4ae6-acdb-ee559a9fe118
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot invoke \"org.apache.poi.xssf.usermodel.XSSFRow.getFirstCellNum()\" because \"headerRow\" is null","errors":[]}
-
-2024-09-19 12:13:23 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 010a9f6c-ee49-4305-b532-390b972fe622
+2024-09-20 13:07:42 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 482f19d9-ea9a-4f4e-8ea8-5db75fc98117
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":5,"item":{"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"123","STATUS":"ACTIVE"}}]
+Response Body: 
 
-2024-09-19 12:22:11 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: b2a5bd19-593c-46ad-af06-3e035efd9912
+2024-09-20 13:11:58 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 94e274ee-c720-450a-b995-b068b941ddea
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":6,"item":{"errors":["Status can only be ACTIVE or INACTIVE","MRN cannot be blank"],"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"","STATUS":"no"},"valid":false}]
+Response Body: 
 
-2024-09-19 12:23:40 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 51cac5c3-5eb0-4e79-a163-4b925e1ad7f3
+2024-09-20 13:12:37 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 25300761-7e50-452e-9bdb-7df00d50bef5
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":6,"item":{"errors":["Status can only be ACTIVE or INACTIVE","MRN cannot be blank"],"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"","STATUS":"no"},"valid":false},{"row":7,"item":{"errors":[],"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"19/10/1999","MRN":"124","STATUS":"ACTIVE"},"valid":true}]
+Response Body: 
 
-2024-09-19 12:27:34 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 1637225f-2494-4cfa-95c4-baf8df4f421e
+2024-09-20 13:25:42 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 0c5ac561-49e7-4256-bbc3-ea4d7761d381
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":6,"item":{"errors":["Status can only be ACTIVE or INACTIVE","MRN cannot be blank"],"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"","STATUS":"no"},"raw":{"STATUS":"no","MRN":"","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","FIRST_NAME":"faiyaz"},"valid":false},{"row":7,"item":{"errors":[],"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"19/10/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"STATUS":"ACTIVE","MRN":"124","LAST_NAME":"shukla","DATE_OF_BIRTH":"19/10/1999","FIRST_NAME":"ruchi"},"valid":true}]
+Response Body: 
 
-2024-09-19 12:28:18 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 4b2bfd94-9c11-43ab-810b-ebb7e99c5198
+2024-09-20 13:26:39 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 370532a5-5fbb-4cad-9e03-5f5a181244c1
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":6,"item":{"errors":["Status can only be ACTIVE or INACTIVE","MRN cannot be blank"],"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"","STATUS":"no"},"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"no"},"valid":false},{"row":7,"item":{"errors":[],"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"19/10/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"19/10/1999","Patient MRN":"124","Status":"ACTIVE"},"valid":true}]
+Response Body: 
 
-2024-09-19 13:19:44 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 25e12725-a9b1-445f-8a3b-82933e539763
+2024-09-20 13:28:20 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: e89c797e-59a2-4ebb-a525-e38bba8936db
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":6,"item":{"FIRST_NAME":"faiyaz","LAST_NAME":"mujawar","DATE_OF_BIRTH":"20/12/1999","MRN":"","STATUS":"no"},"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"no"},"errors":["Status can only be ACTIVE or INACTIVE","MRN cannot be blank"],"valid":false},{"row":7,"item":{"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"19/10/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"19/10/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":[],"valid":true}]
+Response Body: 
 
-2024-09-19 13:21:11 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: dfd18bd1-915a-4cf4-a7ab-bbc5466b7f62
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot deserialize value of type `com.example.exceptionhandlingpoc.constants.Status` from String \"no\": not one of the values accepted for Enum class: [INACTIVE, ACTIVE]\n at [Source: UNKNOWN; byte offset: #UNKNOWN] (through reference chain: com.example.exceptionhandlingpoc.api.dto.batch.PatientImportDto[\"STATUS\"])","errors":[]}
-
-2024-09-19 13:26:57 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 1e018adc-29d4-4a3e-9f65-9d6bdc78790b
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"HV000116: The object to be validated must not be null.","errors":[]}
-
-2024-09-19 13:27:46 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: ce283b95-9507-4c69-9cbe-cb936dff4843
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"HV000116: The object to be validated must not be null.","errors":[]}
-
-2024-09-19 13:28:05 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 4dc3e6c1-779c-4f1e-9455-6e0f1967a22b
+2024-09-20 13:29:18 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 0d292c84-b6e9-45c5-b151-bddfdd5da878
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"no"},"errors":[],"valid":false},{"row":7,"item":null,"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"19/10/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":[],"valid":false}]
+Response Body: 
 
-2024-09-19 13:29:54 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 4181e409-2ec1-4dca-8d61-200c0a9f67da
+2024-09-20 13:29:56 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 263b5131-7b8f-4721-96ad-534f33e1c088
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"no"},"errors":["Parsing failed for: STATUS"],"valid":false},{"row":7,"item":null,"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"19/10/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false}]
+Response Body: 
 
-2024-09-19 13:31:03 [http-nio-8080-exec-5] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: bc1428d6-ea2f-47e7-88e3-6e4b3e33b287
+2024-09-20 13:29:57 [http-nio-8080-exec-4] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: e79f07a6-d6ef-40d2-965e-4688ca52387b
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"no"},"errors":["Parsing failed for: STATUS"],"valid":false},{"row":7,"item":null,"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"36452.0","Patient MRN":"124","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false}]
+Response Body: 
 
-2024-09-19 13:31:14 [http-nio-8080-exec-6] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 837be4a1-e6ce-4e22-9097-bb81d8b8a0c3
+2024-09-20 15:10:01 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 93b449fa-77e8-48bc-94e4-9f2ef4609372
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"no"},"errors":["Parsing failed for: STATUS"],"valid":false},{"row":7,"item":null,"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"36452.0","Patient MRN":"124","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false}]
+Response Body: 
 
-2024-09-19 13:32:41 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: b7297b7a-afe4-4d27-addb-09eecf802271
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false},{"row":7,"item":null,"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"19/10/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false}]
-
-2024-09-19 13:36:41 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: f50897a2-901c-4e55-ab2b-68e81bf97102
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false},{"row":7,"item":null,"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"19/10/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false}]
-
-2024-09-19 14:37:41 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 9ef8765c-ed62-416d-9c89-d979aa13a658
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot invoke \"java.util.Map.get(Object)\" because \"this.columnMappings\" is null","errors":[]}
-
-2024-09-19 14:39:25 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: bdea2bfb-f2a1-48f8-9073-f11dee02087d
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false},{"row":7,"item":null,"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"19/10/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false}]
-
-2024-09-19 14:41:08 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: a614c86a-d4a5-4480-9a21-f8162bc04152
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false},{"row":7,"item":null,"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"19/10/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false}]
-
-2024-09-19 14:43:13 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 5dfb1582-7729-4405-8c8d-aa265aa00f67
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"Cannot get a NUMERIC value from a STRING cell","errors":[]}
-
-2024-09-19 14:44:27 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 4c097cc6-714c-4077-94ad-af77599eaeff
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"HV000030: No validator could be found for constraint 'jakarta.validation.constraints.NotBlank' validating type 'com.example.exceptionhandlingpoc.constants.Status'. Check configuration for 'status'","errors":[]}
-
-2024-09-19 14:44:57 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: e41b436a-6071-4f03-b2ae-be2fee51c557
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"HV000030: No validator could be found for constraint 'jakarta.validation.constraints.NotBlank' validating type 'java.time.LocalDate'. Check configuration for 'dob'","errors":[]}
-
-2024-09-19 14:45:16 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 3f134a79-9ffa-420e-902c-8857eea43063
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 500
-Response Body: {"code":"INTERNAL_SERVER_ERROR","message":"HV000030: No validator could be found for constraint 'jakarta.validation.constraints.Pattern' validating type 'com.example.exceptionhandlingpoc.constants.Status'. Check configuration for 'status'","errors":[]}
-
-2024-09-19 14:45:34 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 0be0b578-9a5f-41c5-87d6-a7fc6e5b090f
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false},{"row":7,"item":{"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"10/19/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"10/19/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":[],"valid":true}]
-
-2024-09-19 14:46:03 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: b5d63c40-876e-4438-ab87-06cbc42ce3e8
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"no"},"errors":["Parsing failed for: STATUS"],"valid":false},{"row":7,"item":{"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"10/19/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"10/19/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":[],"valid":true}]
-
-2024-09-19 14:50:13 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 54fa87c6-e1c4-4000-810e-b8064056e892
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 200
-Response Body: [{"row":6,"item":null,"raw":{"First Name":"faiyaz","Last Name":"mujawar","Date of Birth":"20/12/1999","Patient MRN":"","Status":"ACTIVE"},"errors":["Parsing failed for: DATE_OF_BIRTH"],"valid":false},{"row":7,"item":{"FIRST_NAME":"ruchi","LAST_NAME":"shukla","DATE_OF_BIRTH":"10/19/1999","MRN":"124","STATUS":"ACTIVE"},"raw":{"First Name":"ruchi","Last Name":"shukla","Date of Birth":"10/19/1999","Patient MRN":"124","Status":"ACTIVE"},"errors":[],"valid":true}]
-
-2024-09-19 15:55:23 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 4ede8ec2-a92c-4aed-8efd-3e57ac93e627
+2024-09-20 15:10:33 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 6e43aba9-2f42-4bb4-a7b1-e720e9bf060d
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 400
 Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
 
-2024-09-19 15:56:50 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 6306b552-f3bb-4135-8333-267fc3b2e1da
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 400
-Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
-
-2024-09-19 16:46:25 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 8d3b18ac-c23b-44de-8f8d-0ea65d98ddb7
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 400
-Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
-
-2024-09-19 16:46:57 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: e6ec85ab-c7d8-4216-aba7-43a2512d8bb6
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 400
-Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
-
-2024-09-19 16:47:44 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 7a490892-ca11-4458-8209-5e080458158a
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 400
-Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
-
-2024-09-19 16:49:32 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 16ca08c9-32ed-4c45-8a66-a4d775a956ab
+2024-09-20 15:10:42 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 6a7554e8-b8da-4f8c-a32a-6e4e3c7cb498
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
 Response Body: 
 
-2024-09-19 16:49:52 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: e8155241-679c-48b8-b304-d699a26e4fe1
+2024-09-20 15:12:15 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 270a9e07-5308-43ec-9fc8-2d719d81cbdb
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
 Response Body: 
 
-2024-09-19 16:53:29 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 5336fa12-bb1a-4d52-a834-078760ddeb91
+2024-09-20 15:13:18 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: fd58bcae-d6c0-4b42-8201-632b06da26b2
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
 Response Body: 
 
-2024-09-19 17:04:06 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: e35c4d42-6de4-467c-af3a-406cf5701d23
+2024-09-20 15:13:38 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: f20e0a01-bac6-481a-9201-84fb8f46fccb
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
 Response Body: 
 
-2024-09-19 17:04:40 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: daef5ad3-400a-4e20-b9c1-84fcde3b4bae
-Request URI: POST /batch
-Request Body: 
---
-Response Status: 400
-Response Body: {"code":"SQL_EXCEPTION","message":"Table 'error_handling_poc.batch_job_instance' doesn't exist","errors":[]}
-
-2024-09-19 17:05:13 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: c95570b3-405c-4993-a212-56d527c502fe
+2024-09-20 15:15:49 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 725e225a-513c-474a-ae1e-7c5016743677
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
 Response Body: 
 
-2024-09-19 17:09:41 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 6eb847a5-a5ba-4e21-9777-eb980fcbc31e
+2024-09-20 15:16:37 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: fe7d5b6f-a808-4038-a33c-f0a7469791cd
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
 Response Body: 
 
-2024-09-19 17:15:42 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 947209d2-1601-4af7-af8e-1aea7be14c8d
+2024-09-20 15:17:14 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: e0697ba2-54c9-4fa2-be7c-fda9da727807
 Request URI: POST /batch
 Request Body: 
 --
 Response Status: 200
 Response Body: 
 
-2024-09-19 17:25:02 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
-Request ID: 2ed8351e-672b-4898-8d36-ba8004cf0107
+2024-09-20 15:18:08 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 3fa44af0-695f-4db3-a261-3d8824ee5b07
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 15:19:48 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 5534c850-c33b-42de-82be-a650b243be56
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 17:53:01 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: e65a2cdf-bd44-41c7-9e35-c40cfd30a731
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 17:53:02 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: a10ec96d-ba09-4218-8121-55021ef129ba
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 18:00:15 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 28f7df0d-94cf-44b6-9587-c382f4b29649
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 18:04:32 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: e596edb7-d6bb-4fcc-98a3-b64e9d0f3d97
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 18:07:07 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: c698cd95-9781-4780-9e3f-0168494f721c
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 18:07:19 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: d627146f-cbef-41ec-9dee-71b34c7f13e9
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 18:13:46 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 1adf7d79-d803-4464-8a19-346d0ba6248d
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 18:19:52 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 2f610736-8c45-4682-920c-462691e386cc
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 18:22:46 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: ad601fc9-cc52-494c-8ae8-1d6cba50d09a
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 18:27:08 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 18f37bee-0eb2-4244-952d-f5ee57b6c6b1
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 19:38:31 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 6d383851-1eb9-4d92-85ef-148550de5be5
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 22:56:12 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 91949859-e610-4433-82b1-ba55c8408339
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 22:56:48 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: e0166152-0667-49f6-84a9-d5fc0228bfba
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-20 22:57:18 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 80eb91c2-dfbb-4f25-bd81-2f4f96a7fc65
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-21 22:44:44 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: ea8d0292-8aaa-4717-99c1-77ce74cf735c
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-21 22:45:57 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: dfdaf42d-b2ea-4cc1-b220-270d12373139
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-21 22:46:41 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: ea01b8c7-9c46-40a2-a153-d747f0fbc0ea
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-21 22:46:56 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: a20bf2c8-4c9c-4039-b5dd-4661a4019e58
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-21 22:47:33 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 3cdcec1f-e748-4f71-9078-32fee059e9e9
 Request URI: POST /batch
 Request Body: 
 --

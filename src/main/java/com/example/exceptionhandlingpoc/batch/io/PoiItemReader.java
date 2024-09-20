@@ -18,7 +18,10 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.example.exceptionhandlingpoc.batch.utils.ExcelUtils.*;
 import static com.example.exceptionhandlingpoc.batch.utils.ReflectionUtils.headerColumnFormats;
@@ -103,7 +106,7 @@ public class PoiItemReader<T> implements ResourceAwareItemReaderItemStream<LineI
                         .row(1 + currentRow++)
                         .item(object)
                         .raw(map)
-                        .errors(parseErrorField != null ? Set.of("Parsing failed for: %s".formatted(parseErrorField)) : Set.of())
+                        // .errors(parseErrorField != null ? Set.of("Parsing failed for: %s".formatted(parseErrorField)) : Set.of())
                         .build();
             }
             currentRow++;

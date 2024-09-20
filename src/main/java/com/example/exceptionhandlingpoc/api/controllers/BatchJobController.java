@@ -14,8 +14,6 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,20 +31,16 @@ public class BatchJobController {
     private final JobRegistry jobRegistry;
     private final JobLauncher jobLauncher;
 
-    @Value("classpath:mappings/mappings-1.json")
-    private Resource mappingFile;
-
     @PostMapping
     @SneakyThrows
-    @SuppressWarnings("unchecked")
     public void runBatchJob(@RequestParam("file") @NotNull MultipartFile file) {
-        var id = UUID.randomUUID().toString();
         var inputFilePath = Paths.get(PathUtils.getInputDirPath().toString(), file.getOriginalFilename());
         file.transferTo(inputFilePath);
         var jobParameters = new JobParametersBuilder()
+                .addString("id", UUID.randomUUID().toString())
                 .addString("inputFilePath", inputFilePath.toString())
                 .toJobParameters();
-        var job = jobRegistry.getJob("IMPORT_PATIENT_JOB");
+        var job = jobRegistry.getJob("CSV_PATIENT_IMPORT_JOB");
         runJob(job, jobParameters);
     }
 

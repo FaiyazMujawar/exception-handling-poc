@@ -26,7 +26,7 @@ public class PatientImportDto {
     private LocalDate dob;
 
     @JsonProperty(value = "MRN")
-    @NotBlank(message = "MRN cannot be blank")
+    @NotBlank(message = "'MRN' cannot be blank")
     private String mrn;
 
     @JsonProperty(value = "STATUS")

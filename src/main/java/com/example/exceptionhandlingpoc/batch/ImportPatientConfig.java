@@ -68,7 +68,7 @@ public class ImportPatientConfig {
                     var messages = errors.stream()
                             .map(ConstraintViolation::getMessage)
                             .collect(Collectors.toSet());
-                    item.setErrors(messages);
+                    // item.setErrors(messages);
                 }
                 item.setValid(errors.isEmpty());
             }
