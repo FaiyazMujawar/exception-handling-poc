@@ -318,3 +318,139 @@ Request Body:
 Response Status: 200
 Response Body: 
 
+2024-09-22 09:04:10 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 24f4ab56-8d16-4978-a46b-9bf0e0266fc1
+Request URI: GET /greet
+Request Body: 
+--
+Response Status: 200
+Response Body: Welcome, faiyaz!
+
+2024-09-22 09:05:31 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: de3d2c5c-6441-4ae3-b360-78c2cf9a0e9e
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:39:16 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: c62d1ca5-f9e9-4703-b976-1e43679f6cb3
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:41:20 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: f0c21b6b-8237-48ce-a863-bf3a3ef63442
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:42:12 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 9e2aca09-e002-49f0-879a-cba1c8c0010f
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:43:01 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: f80eb4dc-f315-463a-aadc-8cebef967277
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:43:29 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 6a84ea1c-31ac-4f74-9c83-473561e54944
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:45:04 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: a8736172-99d9-47bb-afe4-6f92fe8ccba2
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:48:13 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 2b3baf38-5f7a-4eb9-b970-7f8f9cba01be
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:48:46 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: d488fcea-5dda-4566-9828-130e66424fbf
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:51:29 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: ea3c15fd-56da-438e-83d7-1dff23ec805b
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:53:44 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 0a3ee9c8-2414-488b-afb9-81370b81e505
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:54:06 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 01d9d415-4095-49d6-a618-a459b4fdfb60
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 10:57:32 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: fb5cc648-5f6c-4141-ad51-d781f1f223a6
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 11:20:58 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 2ef98158-e1c5-4af7-ab96-daffe02dc1b3
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 11:24:12 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 1e622dfc-f8e3-4af3-b455-66535ce822c1
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-22 11:26:12 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 26ecb1df-8f49-4e13-95d4-764d55da38a1
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+

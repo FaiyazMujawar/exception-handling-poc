@@ -42,9 +42,9 @@ public class CsvItemReader<T> implements ResourceAwareItemReaderItemStream<LineI
     private CSVReader reader;
 
     @Builder
-    public CsvItemReader(JsonMapper mapper, Class<T> targetType, Map<String, String> columnMappings, Character delimiter) {
+    public CsvItemReader(JsonMapper mapper, Class<T> targetType, Map<String, String> columnMappings, Character delimiter, Resource resource) {
         Assert.state(nonNull(targetType), "Target type must be provided");
-        // Assert.state(nonNull(resource), "Resource must be provided");
+        Assert.state(nonNull(resource), "Resource must be provided");
         Assert.state(nonNull(columnMappings), "Column mappings must be provided");
         Assert.state(nonNull(delimiter), "Delimiter must be provided");
         Assert.state(nonNull(mapper), "Mapper must be provided");
@@ -56,7 +56,7 @@ public class CsvItemReader<T> implements ResourceAwareItemReaderItemStream<LineI
         this.columnMappings = columnMappings.entrySet().stream().collect(toMap(
                 Map.Entry::getValue, Map.Entry::getKey
         ));
-        // this.resource = resource;
+        this.resource = resource;
     }
 
     @Override
@@ -85,6 +85,7 @@ public class CsvItemReader<T> implements ResourceAwareItemReaderItemStream<LineI
         if (!this.columnMappings.keySet().containsAll(this.headers)) {
             throw new RuntimeException("Column mappings must contain all headers");
         }
+        this.row = 1;
     }
 
     @Override

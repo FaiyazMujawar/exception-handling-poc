@@ -2,7 +2,9 @@ package com.example.exceptionhandlingpoc.batch;
 
 import com.example.exceptionhandlingpoc.api.dto.batch.PatientImportDto;
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
+import com.example.exceptionhandlingpoc.batch.io.ClassifierItemWriter;
 import com.example.exceptionhandlingpoc.batch.io.CsvItemReader;
+import com.example.exceptionhandlingpoc.batch.io.CsvItemWriter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import jakarta.validation.ConstraintViolation;
@@ -18,6 +20,7 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -60,15 +63,13 @@ public class CsvImportPatientConfig {
         if (isBlank(filePath) || !Files.exists(get(filePath))) {
             throw new RuntimeException("File Not found");
         }
-        var reader = CsvItemReader.<PatientImportDto>builder()
+        return CsvItemReader.<PatientImportDto>builder()
                 .mapper(jsonMapper)
-                // .resource(new PathResource(filePath))
+                .resource(new PathResource(filePath))
                 .targetType(PatientImportDto.class)
                 .columnMappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
                 .delimiter(DELIMITER)
                 .build();
-        reader.setResource(new PathResource(filePath));
-        return reader;
     }
 
     @Bean
@@ -88,8 +89,30 @@ public class CsvImportPatientConfig {
 
     @Bean
     @StepScope
-    public ItemWriter<LineItem<PatientImportDto>> patientItemWriter() {
+    public ItemWriter<LineItem<PatientImportDto>> patientSuccessItemWriter() {
         return chunk -> chunk.forEach(item -> System.out.println("Item = " + item));
+    }
+
+    @Bean
+    @SneakyThrows
+    @StepScope
+    @SuppressWarnings("unchecked")
+    public CsvItemWriter<PatientImportDto> patientErrorItemWriter(@Value("#{jobParameters['errorFilePath']}") String filePath) {
+        var writer = CsvItemWriter.<PatientImportDto>builder()
+                .resource(new PathResource(get(filePath)))
+                .mappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
+                .delimiter(DELIMITER)
+                .build();
+        writer.open(new ExecutionContext());
+        return writer;
+    }
+
+    @Bean
+    public ClassifierItemWriter<PatientImportDto> patientClassifierItemWriter(
+            @Qualifier("patientErrorItemWriter") CsvItemWriter<PatientImportDto> errorWriter,
+            @Qualifier("patientSuccessItemWriter") ItemWriter<LineItem<PatientImportDto>> successWriter
+    ) {
+        return new ClassifierItemWriter<>(item -> item.getErrors().isEmpty() ? successWriter : errorWriter);
     }
 
     @Bean
@@ -98,7 +121,7 @@ public class CsvImportPatientConfig {
                                      PlatformTransactionManager transactionManager,
                                      CsvItemReader<PatientImportDto> reader,
                                      @Qualifier("patientLineItemProcessor") ItemProcessor<LineItem<PatientImportDto>, LineItem<PatientImportDto>> processor,
-                                     @Qualifier("patientItemWriter") ItemWriter<LineItem<PatientImportDto>> writer
+                                     @Qualifier("patientClassifierItemWriter") ClassifierItemWriter<PatientImportDto> writer
     ) {
         return new StepBuilder("CSV_PATIENT_IMPORT_STEP", jobRepository)
                 .<LineItem<PatientImportDto>, LineItem<PatientImportDto>>chunk(1, transactionManager)
