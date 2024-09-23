@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.SneakyThrows;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ExecutionContext;
-import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.item.file.ResourceAwareItemWriterItemStream;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
@@ -54,9 +53,10 @@ public class CsvItemWriter<T> implements ResourceAwareItemWriterItemStream<LineI
 
     @Override
     @SneakyThrows
-    public void close() throws ItemStreamException {
-        System.out.println("Close called");
-        this.writer.flush();
+    public void close() {
+        this.writer.close();
+        this.resource = null;
+        System.out.println("Closed...");
         ResourceAwareItemWriterItemStream.super.close();
     }
 
@@ -65,6 +65,7 @@ public class CsvItemWriter<T> implements ResourceAwareItemWriterItemStream<LineI
     public void write(Chunk<? extends LineItem<T>> chunk) {
         var items = chunk.getItems();
         items.forEach(item -> this.writer.writeNext(getData(item).toArray(String[]::new)));
+        this.writer.flush();
     }
 
     // Helpers

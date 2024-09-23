@@ -3,8 +3,8 @@ package com.example.exceptionhandlingpoc.batch;
 import com.example.exceptionhandlingpoc.api.dto.batch.PatientImportDto;
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
 import com.example.exceptionhandlingpoc.batch.io.ClassifierItemWriter;
-import com.example.exceptionhandlingpoc.batch.io.CsvItemReader;
 import com.example.exceptionhandlingpoc.batch.io.CsvItemWriter;
+import com.example.exceptionhandlingpoc.batch.io.ExtendedFlatFileItemReader;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import jakarta.validation.ConstraintViolation;
@@ -43,7 +43,7 @@ import static org.apache.poi.util.StringUtil.isBlank;
 @Component
 @RequiredArgsConstructor
 public class CsvImportPatientConfig {
-    private static final Character DELIMITER = ',';
+    private static final String DELIMITER = ",";
     private final JsonMapper jsonMapper;
     private final Validator validator;
 
@@ -59,17 +59,18 @@ public class CsvImportPatientConfig {
     @StepScope
     @SneakyThrows
     @SuppressWarnings("unchecked")
-    public CsvItemReader<PatientImportDto> reader(@Value("#{jobParameters['inputFilePath']}") String filePath) {
+    public ExtendedFlatFileItemReader<PatientImportDto> reader(@Value("#{jobParameters['inputFilePath']}") String filePath) {
         if (isBlank(filePath) || !Files.exists(get(filePath))) {
             throw new RuntimeException("File Not found");
         }
-        return CsvItemReader.<PatientImportDto>builder()
+        var reader = ExtendedFlatFileItemReader.<PatientImportDto>builder()
                 .mapper(jsonMapper)
                 .resource(new PathResource(filePath))
-                .targetType(PatientImportDto.class)
-                .columnMappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
+                .mappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
                 .delimiter(DELIMITER)
                 .build();
+        reader.setTargetType(PatientImportDto.class);
+        return reader;
     }
 
     @Bean(name = "CSV_PATIENT_IMPORT_PROCESSOR")
@@ -101,7 +102,7 @@ public class CsvImportPatientConfig {
         var writer = CsvItemWriter.<PatientImportDto>builder()
                 .resource(new PathResource(get(filePath)))
                 .mappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
-                .delimiter(DELIMITER)
+                .delimiter(DELIMITER.charAt(0))
                 .build();
         writer.open(new ExecutionContext());
         return writer;
@@ -115,7 +116,7 @@ public class CsvImportPatientConfig {
         var writer = CsvItemWriter.<PatientImportDto>builder()
                 .resource(new PathResource(get(filePath)))
                 .mappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
-                .delimiter(DELIMITER)
+                .delimiter(DELIMITER.charAt(0))
                 .build();
         writer.open(new ExecutionContext());
         return writer;
@@ -147,11 +148,15 @@ public class CsvImportPatientConfig {
             @Qualifier("CSV_PATIENT_IMPORT_STATUS_WRITER") CsvItemWriter<PatientImportDto> statusWriter) {
         return new StepExecutionListener() {
             @Override
-            @SneakyThrows
             public ExitStatus afterStep(@NonNull StepExecution stepExecution) {
-                errorWriter.close();
-                statusWriter.close();
-                return StepExecutionListener.super.afterStep(stepExecution);
+                System.out.println("afterStep called");
+                try {
+                    errorWriter.close();
+                    statusWriter.close();
+                    return ExitStatus.COMPLETED;
+                } catch (Exception e) {
+                    return ExitStatus.FAILED;
+                }
             }
         };
     }
@@ -160,7 +165,7 @@ public class CsvImportPatientConfig {
     @JobScope
     public Step step(JobRepository jobRepository,
                      PlatformTransactionManager transactionManager,
-                     CsvItemReader<PatientImportDto> reader,
+                     @Qualifier("CSV_PATIENT_IMPORT_READER") ExtendedFlatFileItemReader<PatientImportDto> reader,
                      @Qualifier("CSV_PATIENT_IMPORT_PROCESSOR") ItemProcessor<LineItem<PatientImportDto>, LineItem<PatientImportDto>> processor,
                      @Qualifier("CSV_PATIENT_IMPORT_COMPOSITE_WRITER") ItemWriter<LineItem<PatientImportDto>> writer,
                      @Qualifier("CSV_PATIENT_IMPORT_STEP_LISTENER") StepExecutionListener listener

@@ -1,8 +1,7 @@
 package com.example.exceptionhandlingpoc.batch.io;
 
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.example.exceptionhandlingpoc.batch.utils.ParseUtils;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
@@ -14,16 +13,10 @@ import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.item.file.ResourceAwareItemReaderItemStream;
 import org.springframework.core.io.Resource;
-import org.springframework.format.datetime.standard.DateTimeFormatterFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 
 import java.io.FileReader;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -105,52 +98,15 @@ public class CsvItemReader<T> implements ResourceAwareItemReaderItemStream<LineI
             var transformed = map.entrySet().stream().collect(
                     toMap(entry -> this.columnMappings.get(entry.getKey()), Map.Entry::getValue)
             );
-            var errors = new HashMap<String, String>();
-            var item = convertToJavaType(transformed, errors);
+            var result = ParseUtils.parseToType(this.mapper, this.targetType, transformed);
             return LineItem.<T>builder()
                     .row(this.row++)
-                    .item(item)
+                    .item(result.parsed())
                     .raw(map)
-                    .errors(errors)
-                    .isValid(errors.isEmpty())
+                    .errors(result.parseErrors())
                     .build();
         }
         return null;
-    }
-
-    @SneakyThrows
-    private T convertToJavaType(Map<String, String> data, HashMap<String, String> errors) {
-        Assert.state(nonNull(this.mapper), "Mapper must be provided");
-        var object = this.targetType.getDeclaredConstructor().newInstance();
-        for (var field : this.targetType.getDeclaredFields()) {
-            field.setAccessible(true);
-            var annotation = field.getDeclaredAnnotation(JsonProperty.class);
-            if (isNull(annotation)) continue;
-            var name = annotation.value();
-            if (!data.containsKey(name)) continue;
-            try {
-                var format = field.getDeclaredAnnotation(JsonFormat.class);
-                var value = data.get(name);
-                var convertedValue = nonNull(format)
-                        ? convert(field.getType(), value, format.pattern())
-                        : mapper.convertValue(value, field.getType());
-                field.set(object, convertedValue);
-            } catch (Exception e) {
-                errors.put(name, "Cannot parse value: %s".formatted(data.get(name)));
-            }
-        }
-        return object;
-    }
-
-    @SneakyThrows
-    private <K> K convert(Class<K> type, String value, String format) {
-        if (List.of(LocalDate.class, Instant.class, LocalTime.class).contains(type)) {
-            // Maybe use default datetime format?
-            var formatter = new DateTimeFormatterFactory(format).createDateTimeFormatter();
-            var method = type.getMethod("parse", CharSequence.class, DateTimeFormatter.class);
-            return type.cast(method.invoke(null, value, formatter));
-        }
-        throw new RuntimeException("JsonFormat not supported here yet");
     }
 
     @SneakyThrows

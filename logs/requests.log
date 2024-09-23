@@ -454,3 +454,83 @@ Request Body:
 Response Status: 200
 Response Body: 
 
+2024-09-23 16:24:55 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 3b10aaef-6bfa-4c3c-aec6-f7fb9fdf7c5b
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 16:29:17 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: fc076980-6437-46d9-bc69-5d6a2d4936e4
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 16:37:09 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 8469dc07-4236-4a8e-af70-6e2d9d7e4b53
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 16:37:20 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 8099295a-4a98-40a8-ad60-b0f8e179e699
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 16:38:04 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: bdafe338-132c-44bb-8607-5c3dfd17367d
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 16:41:58 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 3de10e42-dd8d-4224-a4a4-b7cede0c4240
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 16:43:34 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 0796acaa-e119-45df-92df-f5d0b77de4f8
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 16:45:47 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 2f6a1cf7-9a69-49c1-a785-06a45c67d054
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 17:23:17 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: f0bdf7a3-f070-430c-bc29-258dfb2f9a34
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 17:24:29 [http-nio-8080-exec-3] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 7f2e4b3f-47f8-4eb4-bd6c-c366dda6d9f0
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
