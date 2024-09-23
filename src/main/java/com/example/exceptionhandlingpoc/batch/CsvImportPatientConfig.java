@@ -2,9 +2,9 @@ package com.example.exceptionhandlingpoc.batch;
 
 import com.example.exceptionhandlingpoc.api.dto.batch.PatientImportDto;
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
-import com.example.exceptionhandlingpoc.batch.io.ClassifierItemWriter;
-import com.example.exceptionhandlingpoc.batch.io.CsvItemWriter;
-import com.example.exceptionhandlingpoc.batch.io.ExtendedFlatFileItemReader;
+import com.example.exceptionhandlingpoc.batch.io.readers.ExtendedFlatFileItemReader;
+import com.example.exceptionhandlingpoc.batch.io.writers.ClassifierItemWriter;
+import com.example.exceptionhandlingpoc.batch.io.writers.ExtendedFlatFileItemWriter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import jakarta.validation.ConstraintViolation;
@@ -98,11 +98,11 @@ public class CsvImportPatientConfig {
     @SneakyThrows
     @StepScope
     @SuppressWarnings("unchecked")
-    public CsvItemWriter<PatientImportDto> errorWriter(@Value("#{jobParameters['errorFilePath']}") String filePath) {
-        var writer = CsvItemWriter.<PatientImportDto>builder()
+    public ExtendedFlatFileItemWriter<PatientImportDto> errorWriter(@Value("#{jobParameters['errorFilePath']}") String filePath) {
+        var writer = ExtendedFlatFileItemWriter.<PatientImportDto>builder()
                 .resource(new PathResource(get(filePath)))
                 .mappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
-                .delimiter(DELIMITER.charAt(0))
+                .delimiter(DELIMITER)
                 .build();
         writer.open(new ExecutionContext());
         return writer;
@@ -112,11 +112,11 @@ public class CsvImportPatientConfig {
     @SneakyThrows
     @StepScope
     @SuppressWarnings("unchecked")
-    public CsvItemWriter<PatientImportDto> statusWriter(@Value("#{jobParameters['statusFilePath']}") String filePath) {
-        var writer = CsvItemWriter.<PatientImportDto>builder()
+    public ExtendedFlatFileItemWriter<PatientImportDto> statusWriter(@Value("#{jobParameters['statusFilePath']}") String filePath) {
+        var writer = ExtendedFlatFileItemWriter.<PatientImportDto>builder()
                 .resource(new PathResource(get(filePath)))
                 .mappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
-                .delimiter(DELIMITER.charAt(0))
+                .delimiter(DELIMITER)
                 .build();
         writer.open(new ExecutionContext());
         return writer;
@@ -124,7 +124,7 @@ public class CsvImportPatientConfig {
 
     @Bean(name = "CSV_PATIENT_IMPORT_CLASSIFIER_WRITER")
     public ClassifierItemWriter<PatientImportDto> classifierWriter(
-            @Qualifier("CSV_PATIENT_IMPORT_ERROR_WRITER") CsvItemWriter<PatientImportDto> errorWriter,
+            @Qualifier("CSV_PATIENT_IMPORT_ERROR_WRITER") ExtendedFlatFileItemWriter<PatientImportDto> errorWriter,
             @Qualifier("CSV_PATIENT_IMPORT_SUCCESS_WRITER") ItemWriter<LineItem<PatientImportDto>> successWriter
     ) {
         return new ClassifierItemWriter<>(item -> item.getErrors().isEmpty() ? successWriter : errorWriter);
@@ -133,7 +133,7 @@ public class CsvImportPatientConfig {
     @Bean(name = "CSV_PATIENT_IMPORT_COMPOSITE_WRITER")
     public ItemWriter<LineItem<PatientImportDto>> compositeItemWriter(
             @Qualifier("CSV_PATIENT_IMPORT_CLASSIFIER_WRITER") ClassifierItemWriter<PatientImportDto> classifierWriter,
-            @Qualifier("CSV_PATIENT_IMPORT_STATUS_WRITER") CsvItemWriter<PatientImportDto> statusFileWriter
+            @Qualifier("CSV_PATIENT_IMPORT_STATUS_WRITER") ExtendedFlatFileItemWriter<PatientImportDto> statusFileWriter
     ) {
         return chunk -> {
             classifierWriter.write(chunk);
@@ -144,8 +144,8 @@ public class CsvImportPatientConfig {
     @Bean(name = "CSV_PATIENT_IMPORT_STEP_LISTENER")
     @StepScope
     public StepExecutionListener stepExecutionListener(
-            @Qualifier("CSV_PATIENT_IMPORT_ERROR_WRITER") CsvItemWriter<PatientImportDto> errorWriter,
-            @Qualifier("CSV_PATIENT_IMPORT_STATUS_WRITER") CsvItemWriter<PatientImportDto> statusWriter) {
+            @Qualifier("CSV_PATIENT_IMPORT_ERROR_WRITER") ExtendedFlatFileItemWriter<PatientImportDto> errorWriter,
+            @Qualifier("CSV_PATIENT_IMPORT_STATUS_WRITER") ExtendedFlatFileItemWriter<PatientImportDto> statusWriter) {
         return new StepExecutionListener() {
             @Override
             public ExitStatus afterStep(@NonNull StepExecution stepExecution) {

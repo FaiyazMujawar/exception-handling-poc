@@ -1,4 +1,4 @@
-package com.example.exceptionhandlingpoc.batch.io;
+package com.example.exceptionhandlingpoc.batch.io.writers;
 
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
 import lombok.NonNull;

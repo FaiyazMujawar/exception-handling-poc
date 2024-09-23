@@ -2,7 +2,7 @@ package com.example.exceptionhandlingpoc.batch;
 
 import com.example.exceptionhandlingpoc.api.dto.batch.PatientImportDto;
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
-import com.example.exceptionhandlingpoc.batch.io.PoiItemReader;
+import com.example.exceptionhandlingpoc.batch.io.readers.PoiItemReader;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;

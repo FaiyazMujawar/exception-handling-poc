@@ -2,8 +2,7 @@ package com.example.exceptionhandlingpoc.scratch;
 
 import com.example.exceptionhandlingpoc.api.dto.batch.PatientImportDto;
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
-import com.example.exceptionhandlingpoc.batch.io.CsvItemReader;
-import com.example.exceptionhandlingpoc.batch.io.ExtendedFlatFileItemReader;
+import com.example.exceptionhandlingpoc.batch.io.readers.ExtendedFlatFileItemReader;
 import com.example.exceptionhandlingpoc.utils.PathUtils;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -40,8 +39,14 @@ public class Main {
             "STATUS", "Status"
     );
     private static final Resource resource;
+    private static final Map<String, Object> patientImportDtoMap = new HashMap<>();
 
     static {
+        patientImportDtoMap.put("FIRST_NAME", "faiyaz");
+        patientImportDtoMap.put("LAST_NAME", "mujawar");
+        patientImportDtoMap.put("DATE_OF_BIRTH", "20/12/1999");
+        patientImportDtoMap.put("MRN", null);
+        patientImportDtoMap.put("STATUS", "ACT");
         try {
             resource = new PathResource(Paths.get(PathUtils.getInputDirPath().toString(), "test.csv"));
         } catch (IOException e) {
@@ -94,15 +99,6 @@ public class Main {
     }
 
     public static void main2(String[] args) {
-        Map<String, Object> patientImportDtoMap = new HashMap<>();
-
-        // Add fields to the map
-        patientImportDtoMap.put("FIRST_NAME", "faiyaz");
-        patientImportDtoMap.put("LAST_NAME", "mujawar");
-        patientImportDtoMap.put("DATE_OF_BIRTH", "20/12/1999");
-        patientImportDtoMap.put("MRN", null);
-        patientImportDtoMap.put("STATUS", "ACT");
-
         try {
             mapper.convertValue(patientImportDtoMap, PatientImportDto.class);
         } catch (IllegalArgumentException ex) {
@@ -113,22 +109,5 @@ public class Main {
                 });
             }
         }
-    }
-
-    public static void main1(String[] args) throws Exception {
-        var reader = CsvItemReader.<PatientImportDto>builder()
-                .resource(resource)
-                .mapper(mapper)
-                .delimiter(',')
-                .columnMappings(map)
-                .targetType(PatientImportDto.class)
-                .build();
-        reader.open(new ExecutionContext());
-        while (true) {
-            var item = reader.read();
-            if (item == null) break;
-            System.out.println("item = " + item);
-        }
-        reader.close();
     }
 }

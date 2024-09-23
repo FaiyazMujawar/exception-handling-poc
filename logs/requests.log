@@ -534,3 +534,35 @@ Request Body:
 Response Status: 200
 Response Body: 
 
+2024-09-23 18:01:01 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: fd6a8cfc-de80-4c8f-b7e0-8ba66b11057e
+Request URI: GET /greet
+Request Body: 
+--
+Response Status: 200
+Response Body: Welcome, faiyaz!
+
+2024-09-23 18:01:07 [http-nio-8080-exec-2] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 8692cc7b-bb0f-40d0-b0a4-f775153794ae
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 20:05:13 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: be71146d-2f4e-46f4-8b1b-03a93efae24d
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
+2024-09-23 20:07:59 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: d7f36410-853e-4f5b-a628-39c0b010b355
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+
