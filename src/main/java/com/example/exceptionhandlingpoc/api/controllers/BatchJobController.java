@@ -36,11 +36,13 @@ public class BatchJobController {
     public void runBatchJob(@RequestParam("file") @NotNull MultipartFile file) {
         var inputFilePath = Paths.get(PathUtils.getInputDirPath().toString(), file.getOriginalFilename());
         var errorFilePath = Paths.get(PathUtils.getErrorDirPath().toString(), "error-" + file.getOriginalFilename());
+        var statusFilePath = Paths.get(PathUtils.getStatusDir().toString(), "status-" + file.getOriginalFilename());
         file.transferTo(inputFilePath);
         var jobParameters = new JobParametersBuilder()
                 .addString("id", UUID.randomUUID().toString())
                 .addString("inputFilePath", inputFilePath.toString())
                 .addString("errorFilePath", errorFilePath.toString())
+                .addString("statusFilePath", statusFilePath.toString())
                 .toJobParameters();
         var job = jobRegistry.getJob("CSV_PATIENT_IMPORT_JOB");
         runJob(job, jobParameters);

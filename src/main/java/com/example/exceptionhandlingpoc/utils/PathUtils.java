@@ -21,6 +21,10 @@ public class PathUtils {
         return getDirPath("error");
     }
 
+    public static Path getStatusDir() throws IOException {
+        return getDirPath("status");
+    }
+
     public static Path getInputDirPath() throws IOException {
         return getDirPath("input");
     }

@@ -55,8 +55,9 @@ public class CsvItemWriter<T> implements ResourceAwareItemWriterItemStream<LineI
     @Override
     @SneakyThrows
     public void close() throws ItemStreamException {
-        ResourceAwareItemWriterItemStream.super.close();
+        System.out.println("Close called");
         this.writer.flush();
+        ResourceAwareItemWriterItemStream.super.close();
     }
 
     @Override
@@ -91,7 +92,7 @@ public class CsvItemWriter<T> implements ResourceAwareItemWriterItemStream<LineI
         var headers = new ArrayList<String>();
         headers.add("Original Row #");
         headers.addAll(this.headers);
-        headers.add("Status");
+        headers.add("Import Status");
         headers.add("Error");
         return headers;
     }
