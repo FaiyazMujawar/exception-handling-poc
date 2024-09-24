@@ -2,13 +2,12 @@ package com.example.exceptionhandlingpoc.scratch;
 
 import com.example.exceptionhandlingpoc.api.dto.batch.PatientImportDto;
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
-import com.example.exceptionhandlingpoc.batch.io.readers.ExtendedFlatFileItemReader;
+import com.example.exceptionhandlingpoc.batch.utils.ParseUtils;
 import com.example.exceptionhandlingpoc.utils.PathUtils;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
@@ -39,7 +38,7 @@ public class Main {
             "STATUS", "Status"
     );
     private static final Resource resource;
-    private static final Map<String, Object> patientImportDtoMap = new HashMap<>();
+    private static final Map<String, String> patientImportDtoMap = new HashMap<>();
 
     static {
         patientImportDtoMap.put("FIRST_NAME", "faiyaz");
@@ -81,21 +80,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-        var reader = ExtendedFlatFileItemReader.<PatientImportDto>builder()
-                .resource(resource)
-                .mappings(map)
-                .delimiter(",")
-                .mapper(mapper)
-                .build();
-        reader.setTargetType(PatientImportDto.class);
-        reader.setLinesToSkip(1);
-        reader.open(new ExecutionContext());
-        while (true) {
-            var item = reader.read();
-            if (item == null) break;
-            System.out.println("item = " + item);
-        }
-        reader.close();
+        var result = ParseUtils.parse(mapper, PatientImportDto.class, patientImportDtoMap);
+        System.out.println("result = " + result.errors());
     }
 
     public static void main2(String[] args) {

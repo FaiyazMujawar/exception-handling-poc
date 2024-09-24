@@ -566,3 +566,11 @@ Request Body:
 Response Status: 200
 Response Body: 
 
+2024-09-23 20:51:26 [http-nio-8080-exec-1] INFO  c.e.e.filters.RequestLoggingFilter - 
+Request ID: 6f1b00c9-bc14-491c-88df-aba2fda34035
+Request URI: POST /batch
+Request Body: 
+--
+Response Status: 200
+Response Body: 
+

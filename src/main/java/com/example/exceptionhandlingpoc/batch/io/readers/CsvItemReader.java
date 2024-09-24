@@ -1,7 +1,6 @@
 package com.example.exceptionhandlingpoc.batch.io.readers;
 
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
-import com.example.exceptionhandlingpoc.batch.utils.ParseUtils;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
@@ -20,12 +19,11 @@ import java.io.FileReader;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.exceptionhandlingpoc.batch.utils.ParseUtils.parse;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toMap;
 import static java.util.stream.IntStream.range;
-
-// TODO: use OpenCSV
 
 @Slf4j
 @SuppressWarnings("unused")
@@ -98,12 +96,12 @@ public class CsvItemReader<T> implements ResourceAwareItemReaderItemStream<LineI
             var transformed = map.entrySet().stream().collect(
                     toMap(entry -> this.columnMappings.get(entry.getKey()), Map.Entry::getValue)
             );
-            var result = ParseUtils.parseToType(this.mapper, this.targetType, transformed);
+            var result = parse(this.mapper, this.targetType, transformed);
             return LineItem.<T>builder()
                     .row(this.row++)
-                    .item(result.parsed())
+                    .item(result.value())
                     .raw(map)
-                    .errors(result.parseErrors())
+                    .errors(result.errors())
                     .build();
         }
         return null;

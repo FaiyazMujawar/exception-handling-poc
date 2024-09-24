@@ -1,13 +1,11 @@
 package com.example.exceptionhandlingpoc.batch.io.readers;
 
 import com.example.exceptionhandlingpoc.batch.dto.LineItem;
-import com.example.exceptionhandlingpoc.batch.utils.ParseUtils;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.Builder;
 import lombok.SneakyThrows;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.core.io.Resource;
@@ -19,6 +17,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import static com.example.exceptionhandlingpoc.batch.utils.ParseUtils.parse;
 import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("all")
@@ -46,14 +45,20 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
     }
 
     private LineMapper<LineItem<T>> getLineMapper() {
-        DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
+        var lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(this.delimiter);
         lineTokenizer.setNames(getHeaders());
 
-        DefaultLineMapper<LineItem<T>> lineMapper = new DefaultLineMapper<>();
-        lineMapper.setLineTokenizer(lineTokenizer);
-        lineMapper.setFieldSetMapper(getFieldSetMapper());
+        var fieldSetMapper = getFieldSetMapper();
 
+        LineMapper<LineItem<T>> lineMapper = new LineMapper<LineItem<T>>() {
+            @Override
+            public LineItem<T> mapLine(String line, int lineNumber) throws Exception {
+                var item = fieldSetMapper.mapFieldSet(lineTokenizer.tokenize(line));
+                item.setRow(lineNumber);
+                return item;
+            }
+        };
         return lineMapper;
     }
 
@@ -65,7 +70,7 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
         if (headerLine == null) {
             throw new RuntimeException("No header line found");
         }
-        var headers = headerLine.split(",");
+        var headers = headerLine.split(this.delimiter);
         if (!this.columnMappings.keySet().containsAll(Set.of(headers))) {
             throw new RuntimeException("Headers must contain all columns");
         }
@@ -79,12 +84,12 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
                 raw.put(header.toString(), value.toString());
             });
             var transformed = raw.entrySet().stream().collect(
-                    toMap(entry -> this.columnMappings.get(entry.getKey()), Map.Entry::getValue)
+                    toMap(entry -> this.columnMappings.get(entry.getKey()), Entry::getValue)
             );
-            var result = ParseUtils.parseToType(this.mapper, this.targetType, transformed);
+            var result = parse(this.mapper, this.targetType, transformed);
             return LineItem.<T>builder()
-                    .item(result.parsed())
-                    .errors(result.parseErrors())
+                    .item(result.value())
+                    .errors(result.errors())
                     .raw(raw)
                     .build();
         };
