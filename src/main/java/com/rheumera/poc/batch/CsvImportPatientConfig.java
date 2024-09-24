@@ -64,14 +64,13 @@ public class CsvImportPatientConfig {
         if (isBlank(filePath) || !Files.exists(get(filePath))) {
             throw new RuntimeException("File Not found");
         }
-        var reader = ExtendedFlatFileItemReader.<PatientImportDto>builder()
+        return ExtendedFlatFileItemReader.<PatientImportDto>builder()
                 .mapper(jsonMapper)
                 .resource(new PathResource(filePath))
+                .type(PatientImportDto.class)
                 .mappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
                 .delimiter(DELIMITER)
                 .build();
-        reader.setTargetType(PatientImportDto.class);
-        return reader;
     }
 
     @Bean(name = "CSV_PATIENT_IMPORT_PROCESSOR")
@@ -102,6 +101,7 @@ public class CsvImportPatientConfig {
     public ExtendedFlatFileItemWriter<PatientImportDto> errorWriter(@Value("#{jobParameters['errorFilePath']}") String filePath) {
         var writer = ExtendedFlatFileItemWriter.<PatientImportDto>builder()
                 .resource(new PathResource(get(filePath)))
+                .targetType(PatientImportDto.class)
                 .mappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
                 .delimiter(DELIMITER)
                 .build();
@@ -116,6 +116,7 @@ public class CsvImportPatientConfig {
     public ExtendedFlatFileItemWriter<PatientImportDto> statusWriter(@Value("#{jobParameters['statusFilePath']}") String filePath) {
         var writer = ExtendedFlatFileItemWriter.<PatientImportDto>builder()
                 .resource(new PathResource(get(filePath)))
+                .targetType(PatientImportDto.class)
                 .mappings(jsonMapper.readValue(mappingFile.getInputStream(), Map.class))
                 .delimiter(DELIMITER)
                 .build();
@@ -197,7 +198,7 @@ public class CsvImportPatientConfig {
         var field = PatientImportDto.class.getDeclaredField(fieldName);
         var annotation = field.getDeclaredAnnotation(JsonProperty.class);
         if (isNull(annotation)) {
-            throw new Exception("Field {%s} does not have @JsonProperty annotation".formatted(fieldName));
+            throw new RuntimeException("Field {%s} does not have @JsonProperty annotation".formatted(fieldName));
         }
         return annotation.value();
     }

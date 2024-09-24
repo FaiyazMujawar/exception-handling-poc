@@ -2,7 +2,6 @@ package com.rheumera.poc.batch.io.readers;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.rheumera.poc.batch.dto.LineItem;
-
 import lombok.Builder;
 import lombok.SneakyThrows;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -19,6 +18,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import static com.rheumera.poc.batch.utils.ParseUtils.parse;
+import static com.rheumera.poc.batch.utils.ReflectionUtils.getColumnHeaders;
 import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("all")
@@ -30,12 +30,17 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
     private Class<T> targetType;
 
     @Builder
-    public ExtendedFlatFileItemReader(Resource resource, String delimiter, Map<String, String> mappings, JsonMapper mapper) {
+    public ExtendedFlatFileItemReader(Resource resource, String delimiter, Class<T> type, Map<String, String> mappings, JsonMapper mapper) {
+        this.mapper = mapper;
         this.resource = resource;
         this.delimiter = delimiter;
+        this.targetType = type;
+        var classFields = getColumnHeaders(type);
+        if (!classFields.containsAll(mappings.keySet())) {
+            throw new RuntimeException("Column mappings must contain all headers");
+        }
         this.columnMappings = mappings.entrySet().stream()
                 .collect(toMap(Entry::getValue, Entry::getKey));
-        this.mapper = mapper;
         super.setResource(this.resource);
         super.setLineMapper(getLineMapper());
         super.setLinesToSkip(1);

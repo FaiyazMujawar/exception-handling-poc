@@ -1,5 +1,6 @@
 package com.rheumera.poc.batch.io.writers;
 
+import com.rheumera.poc.batch.dto.LineItem;
 import lombok.Builder;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
@@ -8,30 +9,29 @@ import org.springframework.batch.item.file.transform.LineAggregator;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
 
-import com.rheumera.poc.batch.dto.LineItem;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import static java.util.stream.Collectors.toMap;
+import static com.rheumera.poc.batch.utils.ReflectionUtils.getColumnHeaders;
+import static java.lang.String.join;
+import static java.util.function.Predicate.not;
 
 public class ExtendedFlatFileItemWriter<T> extends FlatFileItemWriter<LineItem<T>> {
     private final String delimiter;
-    private final Map<String, String> columnMappings;
     private final List<String> headers;
-    private Resource resource;
 
     @Builder
-    public ExtendedFlatFileItemWriter(String delimiter, Map<String, String> mappings, Resource resource) {
+    public ExtendedFlatFileItemWriter(String delimiter, Map<String, String> mappings, Resource resource, Class<T> targetType) {
+        super();
         this.delimiter = delimiter;
-        this.resource = resource;
-        this.columnMappings = mappings.entrySet().stream().collect(toMap(Entry::getValue, Entry::getKey));
-        this.headers = List.copyOf(this.columnMappings.keySet());
-        super.setResource((WritableResource) this.resource);
+        var classFields = getColumnHeaders(targetType);
+        var addedColumns = mappings.keySet();
+        classFields.removeIf(not(addedColumns::contains));
+        this.headers = classFields.stream().map(mappings::get).toList();
+        super.setResource((WritableResource) resource);
         super.setLineAggregator(getLineAggregator());
-        super.setHeaderCallback(writer -> writer.write(String.join(this.delimiter, getHeaders())));
+        super.setHeaderCallback(writer -> writer.write(join(this.delimiter, getHeaders())));
     }
 
     private LineAggregator<LineItem<T>> getLineAggregator() {
@@ -58,7 +58,7 @@ public class ExtendedFlatFileItemWriter<T> extends FlatFileItemWriter<LineItem<T
             var raw = item.getRaw();
             this.headers.forEach(header -> data.add(raw.get(header)));
             data.add(item.getErrors().isEmpty() ? "SUCCESS" : "FAILED");
-            data.add(String.join(",\n", item.getErrors().values()));
+            data.add(join(",\n", item.getErrors().values()));
             return data.stream().map("\"%s\""::formatted).toArray();
         };
     }
