@@ -4,11 +4,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.rheumera.poc.api.dto.batch.PatientImportDto;
 import com.rheumera.poc.batch.dto.LineItem;
-import com.rheumera.poc.batch.utils.ParseUtils;
+import com.rheumera.poc.batch.io.readers.ExtendedFlatFileItemReader;
 import com.rheumera.poc.utils.PathUtils;
-
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
@@ -81,8 +81,20 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-        var result = ParseUtils.parse(mapper, PatientImportDto.class, patientImportDtoMap);
-        System.out.println("result = " + result.errors());
+        var reader = ExtendedFlatFileItemReader.<PatientImportDto>builder()
+                .resource(resource)
+                .mappings(map)
+                .mapper(mapper)
+                .type(PatientImportDto.class)
+                .delimiter(",")
+                .build();
+        reader.open(new ExecutionContext());
+        while (true) {
+            var item = reader.read();
+            if (item == null) break;
+            System.out.println(item);
+        }
+        reader.close();
     }
 
     public static void main2(String[] args) {
