@@ -98,10 +98,8 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
     @SneakyThrows
     private LineItem<T> parseObject(Map<String, String> data) {
         T converted = null;
-        synchronized (this.problemHandler) {
-            this.problemHandler.clearErrors();
-            converted = this.reader.<T>readValue(mapper.writeValueAsString(data));
-        }
+        this.problemHandler.clearErrors();
+        converted = this.reader.<T>readValue(mapper.writeValueAsString(data));
         return LineItem.<T>builder()
                 .item(converted)
                 .errors(this.problemHandler.getErrors())
