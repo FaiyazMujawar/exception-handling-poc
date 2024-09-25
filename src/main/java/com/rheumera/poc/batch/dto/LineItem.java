@@ -10,10 +10,13 @@ import java.util.Map;
 @Builder
 public class LineItem<T> {
     private int row;
-    private boolean isValid = true;
     private T item;
     @Builder.Default
     private Map<String, String> raw = Map.of();
     @Builder.Default
     private Map<String, String> errors = new HashMap<>();
+
+    public boolean isValid() {
+        return this.errors.isEmpty();
+    }
 }

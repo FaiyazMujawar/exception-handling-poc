@@ -7,7 +7,6 @@ import com.rheumera.poc.batch.dto.LineItem;
 import com.rheumera.poc.batch.io.readers.ExtendedFlatFileItemReader;
 import com.rheumera.poc.batch.io.writers.ClassifierItemWriter;
 import com.rheumera.poc.batch.io.writers.ExtendedFlatFileItemWriter;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import lombok.NonNull;
@@ -79,10 +78,9 @@ public class CsvImportPatientConfig {
         return item -> {
             var errors = validator.validate(item.getItem());
             if (!errors.isEmpty()) {
-                var messages = errors.stream()
-                        .collect(Collectors.toMap(v -> getJsonPropertyName(v.getPropertyPath().toString()), ConstraintViolation::getMessage));
-                messages.forEach(item.getErrors()::putIfAbsent);
-                item.setValid(item.getErrors().isEmpty());
+                errors.stream()
+                        .collect(Collectors.toMap(v -> getJsonPropertyName(v.getPropertyPath().toString()), ConstraintViolation::getMessage))
+                        .forEach(item.getErrors()::putIfAbsent);
             }
             return item;
         };

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.rheumera.poc.api.dto.batch.PatientImportDto;
 import com.rheumera.poc.batch.dto.LineItem;
 import com.rheumera.poc.batch.io.readers.PoiItemReader;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
@@ -67,11 +66,9 @@ public class ImportPatientConfig {
                 var errors = validator.validate(item.getItem());
                 if (!errors.isEmpty()) {
                     var messages = errors.stream()
-                            .map(ConstraintViolation::getMessage)
-                            .collect(Collectors.toSet());
-                    // item.setErrors(messages);
+                            .collect(Collectors.toMap(v -> v.getPropertyPath().toString(), ConstraintViolation::getMessage));
+                    item.setErrors(messages);
                 }
-                item.setValid(errors.isEmpty());
             }
             return item;
         };

@@ -1,5 +1,6 @@
 package com.rheumera.poc.batch.io.readers;
 
+import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.rheumera.poc.batch.dto.LineItem;
 import lombok.Builder;
@@ -17,7 +18,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import static com.rheumera.poc.batch.utils.ParseUtils.parse;
 import static com.rheumera.poc.batch.utils.ReflectionUtils.getColumnHeaders;
 import static java.util.stream.Collectors.toMap;
 
@@ -26,15 +26,19 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
     private final Resource resource;
     private final String delimiter;
     private final Map<String, String> columnMappings;
+    private final ObjectReader reader;
+    private final CustomProblemHandler problemHandler;
     private final JsonMapper mapper;
     private Class<T> targetType;
 
     @Builder
-    public ExtendedFlatFileItemReader(Resource resource, String delimiter, Class<T> type, Map<String, String> mappings, JsonMapper mapper) {
-        this.mapper = mapper;
+    public ExtendedFlatFileItemReader(JsonMapper mapper, Resource resource, Class<T> type, String delimiter, Map<String, String> mappings) {
+        this.targetType = type;
         this.resource = resource;
         this.delimiter = delimiter;
-        this.targetType = type;
+        this.mapper = mapper;
+        this.problemHandler = new CustomProblemHandler();
+        this.reader = mapper.readerFor(this.targetType).withHandler(this.problemHandler);
         var classFields = getColumnHeaders(type);
         if (!classFields.containsAll(mappings.keySet())) {
             throw new RuntimeException("Column mappings must contain all headers");
@@ -46,10 +50,6 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
         super.setLinesToSkip(1);
     }
 
-    public void setTargetType(Class<T> type) {
-        this.targetType = type;
-    }
-
     private LineMapper<LineItem<T>> getLineMapper() {
         var lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(this.delimiter);
@@ -57,7 +57,7 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
 
         var fieldSetMapper = getFieldSetMapper();
 
-        LineMapper<LineItem<T>> lineMapper = new LineMapper<LineItem<T>>() {
+        return new LineMapper<LineItem<T>>() {
             @Override
             public LineItem<T> mapLine(String line, int lineNumber) throws Exception {
                 var item = fieldSetMapper.mapFieldSet(lineTokenizer.tokenize(line));
@@ -65,7 +65,6 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
                 return item;
             }
         };
-        return lineMapper;
     }
 
     @SneakyThrows
@@ -92,13 +91,22 @@ public class ExtendedFlatFileItemReader<T> extends FlatFileItemReader<LineItem<T
             var transformed = raw.entrySet().stream().collect(
                     toMap(entry -> this.columnMappings.get(entry.getKey()), Entry::getValue)
             );
-            var result = parse(this.mapper, this.targetType, transformed);
-            return LineItem.<T>builder()
-                    .item(result.value())
-                    .errors(result.errors())
-                    .raw(raw)
-                    .build();
+            return parseObject(transformed);
         };
+    }
+
+    @SneakyThrows
+    private LineItem<T> parseObject(Map<String, String> data) {
+        T converted = null;
+        synchronized (this.problemHandler) {
+            this.problemHandler.clearErrors();
+            converted = this.reader.<T>readValue(mapper.writeValueAsString(data));
+        }
+        return LineItem.<T>builder()
+                .item(converted)
+                .errors(this.problemHandler.getErrors())
+                .raw(data)
+                .build();
     }
 
 }
